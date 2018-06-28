@@ -16,5 +16,7 @@
   1. 至google map platform申請，申請時會被要求在google cloud platform開一個專案，然後選用那個專案申請，申請API key網址如下
      https://developers.google.com/maps/documentation/geocoding/get-api-key?hl=zh-tw
   2. 申請到API key之後，要將API key貼入程式碼中
-     打開/app/views/layouts/application.html.erb
+     打開/app/views/layouts/application.html.erb，將申請到的API key貼到下方紅框處
+     ![image](https://github.com/iceland101113/coffee_project/blob/master/Put_API_Key.png
+)
      
