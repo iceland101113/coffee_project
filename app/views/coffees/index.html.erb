@@ -1,7 +1,7 @@
 <div id="content">
   <div class="container">
     <br>
-    <button onclick="Home()" type="button" class="btn" data-toggle="tooltip" data-placement="bottom" title="全台總覽" style="background-color: #555555;"><span class="glyphicon glyphicon-home" style="color: white;" aria-hidden="true"></span></button> <button onclick="My_pos()" type="button" class="btn" data-toggle="tooltip" data-placement="bottom" title="我的位置" style="background-color: #555555;"><span class="glyphicon glyphicon-map-marker" style="color: white;" aria-hidden="true"></span></button>
+    <button onclick="Home()" type="button" class="btn" data-toggle="tooltip" data-placement="bottom" title="全台總覽" style="background-color: #555555;"><span class="glyphicon glyphicon-home" style="color: white;" aria-hidden="true"></span></button> <button onclick="My_pos()" type="button" class="btn" data-toggle="tooltip" data-placement="bottom" title="我的位置" style="background-color: #555555;"><span class="glyphicon glyphicon-map-marker" style="color: white;" aria-hidden="true"></span></button> <input id="關" type="button" value="Hide Listings">
    <!--  <a href="#" data-toggle="tooltip" title="Hooray!">Hover over me</a> -->
     <hr>
     <h1>尋找鄰近咖啡廳</h1> 
@@ -308,7 +308,6 @@
             this.setIcon(defaultIcon);
           });
 
-
       }
 
         // Try HTML5 geolocation.
@@ -360,8 +359,12 @@
 
       var markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 
-        document.getElementById('search-within-time').addEventListener('click', function() {
+      document.getElementById('search-within-time').addEventListener('click', function() {
           searchWithinTime();
+        });
+
+      document.getElementById('關').addEventListener('click', function() {
+            hideMarkers(markers);
         });
 
     }
@@ -502,7 +505,7 @@
             origins: [origin],
             destinations: destinations,
             travelMode: google.maps.TravelMode[mode],
-            unitSystem: google.maps.UnitSystem.IMPERIAL,
+            unitSystem: google.maps.UnitSystem.METRIC,
           }, function(response, status) {
             if (status !== google.maps.DistanceMatrixStatus.OK) {
               window.alert('Error was' + status);
@@ -530,17 +533,19 @@
             var element = results[j];
             if (element.status === "OK") {
               // The distance is returned in feet, but the TEXT is in miles. If we wanted to switch the function to show markers within a user-entered DISTANCE, we would need the value for distance, but for now we only need the text.
-              var distanceText = element.distance.text;
+              // var distanceText = element.distance.text;
+              var distance_num = element.distance.value;
               // Duration value is given in seconds so we make it MINUTES. We need both the value and the text.
               var duration = element.duration.value/60;
-              var durationText = element.duration.text;
+              var duration_num = Math.round(duration);
+              // var durationText = element.duration.text;
               if (duration <= maxDuration) {
                 //the origin [i] should = the marker[i]
                 markers[marker_id[j]].setMap(map);
                 atLeastOne = true;
                 // Create a mini infowindow to open immediately and contain the distance and duration
                 var infowindow = new google.maps.InfoWindow({
-                  content: durationText + ' away, ' + distanceText + '<div><input type=\"button\" value=\"View Route\" onclick =' + '\"displayDirections(&quot;' + destinations[j] + '&quot;);\"></input></div>'
+                  content: '約 ' + duration_num + ' 分鐘可達， ' + distance_num + ' 公尺' + '<div><input type=\"button\" value=\"最佳路徑\" onclick =' + '\"displayDirections(&quot;' + destinations[j] + '&quot;);\"></input></div>'
                 }); 
                 infowindow.open(map, markers[marker_id[j]]);
                 // Put this in so that this small window closes if the user clicks the marker, when the big infowindow opens
@@ -568,18 +573,25 @@
           travelMode: google.maps.TravelMode[mode]
         }, function(response, status){
           if (status == google.maps.DirectionsStatus.OK) {
+            // hideMarkers(markers);
             var directionsDisplay = new google.maps.DirectionsRenderer({
               map: map,
               directions: response,
               draggable: true,
               polylineOptions: {
                 strokeColor: 'green'
-              }
+              },
           });
         } else {
           window.alert('Directions request failed due to ' + status);
         }
        });
+      }
+
+      function hideMarkers(markers) {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(null);
+        }
       }
 
       $(document).ready(function(){
