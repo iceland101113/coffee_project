@@ -1,3 +1,4 @@
+`ssh-add`
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.11.0"
 
@@ -21,7 +22,7 @@ set :deploy_to, '/home/deploy/coffee_project'
 # set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, "config/database.yml"
+append :linked_files, "config/database.yml", 'config/secrets.yml'
 
 # Default value for linked_dirs is []
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/uploads"
