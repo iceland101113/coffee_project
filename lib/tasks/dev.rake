@@ -51,4 +51,30 @@ namespace :dev do
     puts "now you have #{CoffeeDatum.count} coffee shop data"
   end
 
+  task set_county: :environment do
+
+    coffees = CoffeeDatum.all
+
+    coffees.each do |coffee|
+
+        url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+coffee.latitude+","+coffee.longitude+"&language=zh-TW&key=AIzaSyCFlu2Yl2-UarWqHYi8-uIMDRwWsJ1I3FQ"
+        response = RestClient.get(url)
+        data = JSON.parse(response.body)
+        if data["status"] == "OK"
+            city_result = data["results"][0]["address_components"][4]["long_name"]
+            town_result = data["results"][0]["address_components"][3]["long_name"]
+        else
+            city_result = coffee.address[0..2]
+            town_result = coffee.address[3..5]
+        end
+            coffee.city = city_result
+            coffee.town = town_result
+            coffee.save
+
+    end
+
+    puts "now you have added #{CoffeeDatum.count} city and town informations to coffee shop table"
+
+  end
+
 end

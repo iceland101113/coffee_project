@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180726134740) do
+ActiveRecord::Schema.define(version: 20180726161904) do
 
   create_table "coffee_data", force: :cascade do |t|
     t.string "name"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 20180726134740) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "county_id"
+    t.string "city"
+    t.string "town"
     t.index ["county_id"], name: "index_coffee_data_on_county_id"
   end
 
