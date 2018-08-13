@@ -1,7 +1,7 @@
 <div id="content">
   <div class="container">
     <br>
-    <button onclick="Home()" type="button" class="btn" data-toggle="tooltip" data-placement="bottom" title="全台總覽" style="background-color: #555555;"><span class="glyphicon glyphicon-home" style="color: white;" aria-hidden="true"></span></button> <button onclick="My_pos()" type="button" class="btn" data-toggle="tooltip" data-placement="bottom" title="我的位置" style="background-color: #555555;"><span class="glyphicon glyphicon-map-marker" style="color: white;" aria-hidden="true"></span></button> <input id="關" type="button" value="Hide Listings">
+    <button onclick="Home()" type="button" class="btn" data-toggle="tooltip" data-placement="bottom" title="全台總覽" style="background-color: #555555;"><span class="glyphicon glyphicon-home" style="color: white;" aria-hidden="true"></span></button> <button onclick="My_pos()" type="button" class="btn" data-toggle="tooltip" data-placement="bottom" title="我的位置" style="background-color: #555555;"><span class="glyphicon glyphicon-map-marker" style="color: white;" aria-hidden="true"></span></button> 
    <!--  <a href="#" data-toggle="tooltip" title="Hooray!">Hover over me</a> -->
     <hr>
     <h1>尋找鄰近咖啡廳</h1> 
@@ -54,6 +54,11 @@
       </div>
       <button id="search-within-time" type="button" class="btn btn-info">走！！</button>
     </div>
+    
+    <div id="show-result">
+
+    </div>
+
   </div>
 </div>
 
@@ -62,6 +67,8 @@
   var map;
 
   var pos;
+
+  var findnum;  
 
   var locations = [];
 
@@ -527,6 +534,8 @@
         // Because there might be multiple origins and destination we have a nested loop
         //Then, make sure at least 1 result was found.
         var atLeastOne = false;
+        findnum = 0;
+
         for (var i = 0; i < origins.length; i++) {
           var results = response.rows[i].elements;
           for (var j = 0; j < results.length; j++) {
@@ -541,6 +550,9 @@
               // var durationText = element.duration.text;
               if (duration <= maxDuration) {
                 //the origin [i] should = the marker[i]
+                findnum += 1;
+                console.log(findnum);
+                $('#show-result').html("<h4>共 " + findnum + " 筆結果</h4>");
                 markers[marker_id[j]].setMap(map);
                 atLeastOne = true;
                 // Create a mini infowindow to open immediately and contain the distance and duration
