@@ -370,9 +370,9 @@
           searchWithinTime();
         });
 
-      document.getElementById('關').addEventListener('click', function() {
-            hideMarkers(markers);
-        });
+      // document.getElementById('關').addEventListener('click', function() {
+      //       hideMarkers(markers);
+      //   });
 
     }
 
@@ -552,7 +552,7 @@
                 //the origin [i] should = the marker[i]
                 findnum += 1;
                 console.log(findnum);
-                $('#show-result').html("<h4>共 " + findnum + " 筆結果</h4>");
+                // $('#show-result').html("<h4>共 " + findnum + " 筆結果</h4>");
                 markers[marker_id[j]].setMap(map);
                 atLeastOne = true;
                 // Create a mini infowindow to open immediately and contain the distance and duration
@@ -568,6 +568,8 @@
               }
             }
           }
+
+          $('#show-result').html("<h4>共 " + findnum + " 筆結果</h4>");
         }
       }
 
