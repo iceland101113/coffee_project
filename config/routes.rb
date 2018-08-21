@@ -5,7 +5,8 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :coffees, only: [:index, :create, :show, :update, :destroy]
+      resources :coffees, only: [:index, :show]
+      post "coffees", to: "coffees#index" 
     end
   end
 end
