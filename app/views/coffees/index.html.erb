@@ -1,10 +1,11 @@
 <div id="content">
   <div class="container">
     <br>
-    <button onclick="Home()" type="button" class="btn" data-toggle="tooltip" data-placement="bottom" title="全台總覽" style="background-color: #555555;"><span class="glyphicon glyphicon-home" style="color: white;" aria-hidden="true"></span></button> <button onclick="My_pos()" type="button" class="btn" data-toggle="tooltip" data-placement="bottom" title="我的位置" style="background-color: #555555;"><span class="glyphicon glyphicon-map-marker" style="color: white;" aria-hidden="true"></span></button> 
+    <button onclick="Home()" type="button" class="btn" data-toggle="tooltip" data-placement="bottom" title="全台總覽" style="background-color: #555555;"><span class="glyphicon glyphicon-home" style="color: white;" aria-hidden="true"></span></button> <button onclick="My_pos()" type="button" class="btn" data-toggle="tooltip" data-placement="bottom" title="我的位置" style="background-color: #555555;"><span class="glyphicon glyphicon-map-marker" style="color: white;" aria-hidden="true"></span></button>
+    <%= link_to '<span class="glyphicon glyphicon-save" style="color: white;" aria-hidden="true"></span>'.html_safe, coffees_path(format: :xls, params: request.parameters), class: 'btn', style: 'background-color: #555555;', title: "匯出資料", data: {toggle: "tooltip", placement: "bottom"} %>
    <!--  <a href="#" data-toggle="tooltip" title="Hooray!">Hover over me</a> -->
     <hr>
-    <h1>尋找鄰近咖啡廳</h1> 
+    <h1>尋找鄰近咖啡廳</h1>
     <div>
       <span class="text"> 走路 </span>
       <select class="form-control" id="max-duration">
@@ -54,7 +55,7 @@
       </div>
       <button id="search-within-time" type="button" class="btn btn-info">走！！</button>
     </div>
-    
+
     <div id="show-result">
 
     </div>
@@ -68,7 +69,7 @@
 
   var pos;
 
-  var findnum;  
+  var findnum;
 
   var locations = [];
 
@@ -261,10 +262,10 @@
       }
     ]
   }
-        ]; 
+        ];
 
         // Constructor creates a new map - only center and zoom are required.
-        
+
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 23.781389, lng: 120.958699},
           zoom: 8,
@@ -329,16 +330,16 @@
               position: {lat: pos['lat'], lng: pos['lng']},
               title: '我的位置',
               map: map,
-            }); 
+            });
 
             var pos_infoWindow = new google.maps.InfoWindow();
 
             posMarker.addListener('click', function() {
               posInfoWindow(this, pos_infoWindow);
             });
-            
+
             map.setCenter(pos);
-            map.setZoom(16);    
+            map.setZoom(16);
 
             //定位點的infowindow 並自動打開
             // pos_infoWindow.setPosition(pos);
@@ -348,7 +349,7 @@
             //   position: {lat: pos['lat'], lng: pos['lng']},
             //   title: '我的位置',
             //   map: map,
-            // }); 
+            // });
 
             // var pos_infoWindow = new google.maps.InfoWindow();
 
@@ -384,7 +385,7 @@
           new google.maps.Point(0, 0),
           new google.maps.Point(10, 34),
           new google.maps.Size(21,34));
-        return markerImage;                   
+        return markerImage;
       }
 
       function populateInfoWindow(marker, infowindow) {
@@ -402,7 +403,7 @@
 
 
           infowindow.open(map, marker);
-        }  
+        }
 
       }
 
@@ -421,7 +422,7 @@
 
 
           infowindow.open(map, marker);
-        }  
+        }
 
       }
 
@@ -439,14 +440,14 @@
           position: {lat: pos['lat'], lng: pos['lng']},
           title: '我的位置',
           map: map,
-        }); 
+        });
 
         var pos_infoWindow = new google.maps.InfoWindow();
 
         posMarker.addListener('click', function() {
           posInfoWindow(this, pos_infoWindow);
         });
-        
+
         map.setCenter(pos);
         map.setZoom(16);
 
@@ -479,28 +480,28 @@
                 destinations.push(locations[i].location);
                 marker_id.push(i);
               }
-            }  
+            }
           } else if (wifi_option != null && seat_option == null) {
             for (var i = 0; i < markers.length; i++) {
               if (locations[i].location.lat <= pos.lat+0.005 && locations[i].location.lng <= pos.lng+0.005 && locations[i].location.lat >= pos.lat-0.005 && locations[i].location.lng >= pos.lng-0.005 && locations[i].wifi >= parseInt(wifi_option) ){
                 destinations.push(locations[i].location);
                 marker_id.push(i);
               }
-            }              
+            }
           } else if (wifi_option == null && seat_option != null ) {
             for (var i = 0; i < markers.length; i++) {
               if (locations[i].location.lat <= pos.lat+0.005 && locations[i].location.lng <= pos.lng+0.005 && locations[i].location.lat >= pos.lat-0.005 && locations[i].location.lng >= pos.lng-0.005 && locations[i].seat >= parseInt(seat_option) ){
                 destinations.push(locations[i].location);
                 marker_id.push(i);
               }
-            }  
+            }
           } else {
             for (var i = 0; i < markers.length; i++) {
               if (locations[i].location.lat <= pos.lat+0.005 && locations[i].location.lng <= pos.lng+0.005 && locations[i].location.lat >= pos.lat-0.005 && locations[i].location.lng >= pos.lng-0.005 && locations[i].wifi >= parseInt(wifi_option) && locations[i].seat >= parseInt(seat_option) ){
                 destinations.push(locations[i].location);
                 marker_id.push(i);
               }
-            }  
+            }
           }
 
           console.log(destinations);
@@ -522,7 +523,7 @@
             }
 
           });
-        
+
 
       }
 
@@ -558,7 +559,7 @@
                 // Create a mini infowindow to open immediately and contain the distance and duration
                 var infowindow = new google.maps.InfoWindow({
                   content: '約 ' + duration_num + ' 分鐘可達， ' + distance_num + ' 公尺' + '<div><input type=\"button\" value=\"最佳路徑\" onclick =' + '\"displayDirections(&quot;' + destinations[j] + '&quot;);\"></input></div>'
-                }); 
+                });
                 infowindow.open(map, markers[marker_id[j]]);
                 // Put this in so that this small window closes if the user clicks the marker, when the big infowindow opens
                 markers[i].infowindow = infowindow;
@@ -609,9 +610,9 @@
       }
 
       $(document).ready(function(){
-        $('[data-toggle="tooltip"]').tooltip(); 
+        $('[data-toggle="tooltip"]').tooltip();
       });
- 
+
     // $(".add-option-title").click(
     //   function() {
     //     //toggle 像電燈般開闔物件

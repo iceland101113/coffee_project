@@ -1,5 +1,4 @@
 class CoffeeDatum < ApplicationRecord
-  belongs_to :county
 
   def lat_dist_1(pos)
     if pos + 0.03 > self.latitude.to_f && pos - 0.03 < self.latitude.to_f

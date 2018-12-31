@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Coffees">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">咖啡店名</Data></Cell>
+        <Cell><Data ss:Type="String">wifi穩定度</Data></Cell>
+        <Cell><Data ss:Type="String">座位舒適程度</Data></Cell>
+        <Cell><Data ss:Type="String">安靜程度</Data></Cell>
+        <Cell><Data ss:Type="String">食物美味度</Data></Cell>
+        <Cell><Data ss:Type="String">便宜程度</Data></Cell>
+        <Cell><Data ss:Type="String">地址</Data></Cell>
+        <Cell><Data ss:Type="String">緯度</Data></Cell>
+        <Cell><Data ss:Type="String">經度</Data></Cell>
+        <Cell><Data ss:Type="String">開始營業時間</Data></Cell>
+      </Row>
+      <% @coffees.each do |coffee| %>
+        <Row>
+          <Cell><Data ss:Type="String"><%= coffee.name %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= coffee.wifi %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= coffee.seat %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= coffee.quiet %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= coffee.tasty %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= coffee.cheap %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= coffee.address %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= coffee.latitude %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= coffee.longitude %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= coffee.open_time %></Data></Cell>
+        </Row>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
