@@ -24,6 +24,5 @@
     - apply a google map service API key on google map platform，the website can find below:
       https://developers.google.com/maps/documentation/geocoding/get-api-key?hl=zh-tw
     - attach the API key to /app/views/layouts/application.html.erb 
-    
-      ![image](https://github.com/iceland101113/coffee_project/blob/master/Put_API_Key.png
+      ![image](https://github.com/iceland101113/coffee_project/blob/master/Put_API_Key.png)
      
