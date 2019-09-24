@@ -11,7 +11,7 @@ a website helping people to find the coffee shop near by and give them a optimiz
   + filtering the coffee shop we want to search(wifi condition, the seat is comfortable or not)
   
 ## Version
-* Ruby
+* Ruby 2.3.7
 * Rails 5.1.6
 * Google Map API
 
