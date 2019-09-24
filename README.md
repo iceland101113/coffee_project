@@ -1,4 +1,5 @@
 # find coffee shop near you website
+a website helping people to find the coffee shop near by and give them a optimize route option
 
 ## Intruduction
 * All user can: 
