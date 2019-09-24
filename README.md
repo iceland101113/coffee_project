@@ -1,7 +1,7 @@
 # find coffee shop near you website
 
 ## Intruduction
- * All user can:
+ * All user can: 
   - see all coffee shop distribution in Taiwan
   - see all coffee shop detail infomation(name, address, website...)
   - navigate to their current location
