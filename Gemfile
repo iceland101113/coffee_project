@@ -35,7 +35,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'rest-client'
 
-gem 'bootstrap-sass', '~> 3.3.7'
+gem 'bootstrap-sass', '~> 3.4.1'
 
 gem 'jquery-rails'
 
