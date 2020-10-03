@@ -1,23 +1,27 @@
-class Api::V1::CoffeesController < ApplicationController
-  protect_from_forgery with: :null_session
-  skip_before_action :verify_authenticity_token
+class Api::V1::CoffeesController < ApiController
 
   def index
-    @user_position = params[:position]
-    puts @user_position[:latitude]
-    puts @user_position[:longitude]
-    coffees = []
-    CoffeeDatum.all.each do |coffee|
-      if coffee.lat_dist_1(@user_position[:latitude]) && coffee.lon_dist_1(@user_position[:longitude])
-        coffees << coffee
-      end      
+    @coffees = CoffeeDatum.all.map do |coffee|
+      {  
+        title: coffee.name, 
+        open_time: coffee.open_time, 
+        address: coffee.address, 
+        url: coffee.url, 
+        location: { 
+          lat: coffee.latitude.to_f, 
+          lng: coffee.longitude.to_f
+        }, 
+        wifi: coffee.wifi.to_i, 
+        seat: coffee.seat.to_i, 
+        quiet: coffee.quiet.to_i, 
+        tasty: coffee.tasty.to_i, 
+        cheap: coffee.cheap.to_i, 
+        music: coffee.music.to_i   
+      }  
     end
-    ## 先得到 位置的所在城市，再去找 最近的點？
-    puts coffees.length
-    puts coffees.first.longitude
-    puts "===="
-     render json: {
-        data: coffees
-      }
+
+    render json: {
+      data: @coffees
+    }
   end
 end

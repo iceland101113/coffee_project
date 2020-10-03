@@ -12,7 +12,12 @@
 //
 //= require rails-ujs
 //= require turbolinks
-//= require_tree .
 //= require jquery
 //= require bootstrap-sprockets
 //= require bootstrap-slider
+//= require_tree ./map
+//= require_tree ./position
+
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});

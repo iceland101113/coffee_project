@@ -41,6 +41,14 @@ gem 'jquery-rails'
 
 gem 'bootstrap-slider-rails'
 
+gem 'sidekiq'
+
+gem 'sinatra'
+
+gem 'to_xls-rails'
+
+gem 'pry'
+
 group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-passenger'
