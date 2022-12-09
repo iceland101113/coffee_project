@@ -1,6 +1,8 @@
 # find coffee shop near you website
 a website helping people to find the coffee shop near by and give them a optimize route option
 
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/wyzv8zaNVF4/0.jpg)](https://youtu.be/wyzv8zaNVF4 "Weather App Demo")
+
 ## Intruduction
 * All user can:
   + see all coffee shop distribution in Taiwan
